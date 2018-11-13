@@ -1,41 +1,41 @@
 <template>
   <li @click="toggle">
-    {{band.name}}
-
+    {{thisBand.name}}
     <p v-show="open">
-      {{band.songs | join}}
-      <input type="text" placeholder="Add more songs..." @click.stop @keyup.enter="addSong" v-model="newSong"> 
+      {{thisBand.songs | join}}
+      <input type="text" placeholder="Add song" 
+      @click.stop 
+      @keyup.enter="addSong"
+      v-model="song"/>
     </p>
-
-  </li>
+    </li>
 </template>
-
-
 <script>
 export default {
-  name: 'BandItem',
-  data () {
-    return {
-      newSong: '',
-      open: false
+  name:'BandItem',
+  data(){
+    return{
+    open:false,
+    song:''
     }
   },
-  props: {
-    band: Object
+  props:{
+    thisBand:Object
   },
-  filters: {
-    join (arr) {
+  filters:{
+    join(arr){
       return arr.join(', ')
     }
   },
-  methods: {
-    toggle () {
-      this.open = !this.open
+  methods:{
+    toggle(){
+      this.open=!this.open
     },
-    addSong () {
-      this.band.songs.push(this.newSong)
-      this.newSong = ''
-    }
+addSong(){
+this.thisBand.songs.push(this.song);
+}
   }
+  
 }
 </script>
+
